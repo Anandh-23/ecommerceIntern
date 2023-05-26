@@ -1,0 +1,70 @@
+package com.intern.ecommerce.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Cart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long cartId;
+
+//    @OneToMany(mappedBy = "cart")
+//    @JoinColumn(name = "product_id")
+
+    @ManyToOne(targetEntity = Product.class)//cascade = CascadeType.ALL,
+    @JoinColumn(name = "product_id", referencedColumnName = "productId")
+    private List<Product> products;
+    private List<Integer> quantity;
+    @OneToOne //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id",nullable = false)
+    private Customer customer;
+
+}
+
+
+package com.intern.ecommerce.entity;
+
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Orders {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long ordersId;
+
+    @OneToOne
+    @JoinColumn(name = "cartId")
+    private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id",referencedColumnName = "customerId")
+    private Customer customer;
+
+    private Long totalAmount;
+
+    private Date date;
+
+}
