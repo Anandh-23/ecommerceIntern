@@ -1,0 +1,58 @@
+input[type=text],input[type=number],input[type=email],input[type=date]{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+
+.container {
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-top: 20px;
+  width: 40%;
+}
+
+.col-25{
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.center{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 50px;
+}
+
+.addbtn{
+  color: white;
+  background-color: #00376f;
+  font-weight: 600;
+  outline: none;
+  background: none;
+	border: none;
+}
+
+.btn-move{
+    margin-left: 58rem;
+    margin-top: -55px;
+    font-size:large;
+
+}
+
+@media screen and (max-width: 600px) {
+  .col-25,input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
