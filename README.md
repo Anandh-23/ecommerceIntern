@@ -13,6 +13,7 @@ const Cart = () => {
     cartProducts: [],
   });
   const [newQuantity, setNewQuantity] = useState(1);
+  const [change, setChange] = useState(false);
 
   const updateCartItems = (jsonData) => {
     setCartItems(jsonData.cartProducts);
@@ -39,20 +40,34 @@ const Cart = () => {
     };
 
     fetchCart();
-  }, []);
+  }, [change]);
 
   const incrementHandler = (cartProductId , quantity ) => {
-    const newQuantity  = quantity + 1;
-    const cartProduct = cartItems[cartProductId];
-    console.log("Quantity" , newQuantity);
-    console.log(cartProduct);
+    const updatedCartItems = cartItems.map((item,index) => {
+      if(index === cartProductId){
+        return {...item, quantity : quantity + 1};
+      }
+      return item;
+    });
+    setChange(!change);
+    setCartItems(updateCartItems);
   }
 
   const decrementHandler = (cartProductId , quantity ) => {
-    const newQuantity  = quantity - 1;
-    const cartProduct = cartItems[cartProductId];
-    console.log("Quantity" , newQuantity);
-    console.log(cartProduct);
+    if(quantity <= 1){
+      return;
+    }
+
+    const updatedCartItems = cartItems.map((item,index) => {
+      if(index === cartProductId){
+        return {...item, quantity : quantity - 1};
+      }
+      return item;
+    });
+
+    setChange(!change);
+    setCartItems(updateCartItems);
+    
   }
 
   return (
@@ -61,10 +76,10 @@ const Cart = () => {
         <div style={{ marginTop: "8rem"}} className="container">
         {Array.isArray(cartItems) && cartItems.length > 0 ? (
           <center>
-              {cartItems.map((item) => (
+              {cartItems.map((item,index) => (
                 <div className="row mb-4"  key={item.cartProductId}>
                   <div className="col-lg-4 col-md-5 col-sm-8 mb-3">
-                    <Card style={{height : "100%", width: "500px"}}>
+                    <Card style={{height : "100%", width: "500px"}} key={index}>
                       <div className="row no-gutters">
                         <div className="col-md-5">
                           <Card.Img
@@ -77,13 +92,13 @@ const Cart = () => {
                           <Card.Text>
                               <span className="mb-2">
                                 <button style={{background:"none", border: "none", outline: "none"}} 
-                                    onClick = {() => decrementHandler(cartItems.indexOf(item), item.quantity)}>
+                                    onClick = {() => decrementHandler(index, item.quantity)}>
                                   -
                                 </button>
                                 {setNewQuantity(item.quantity)}
                                 <b>{newQuantity}</b>
                                 <button style={{background:"none", border: "none", outline: "none"}} 
-                                    onClick = {() => incrementHandler(cartItems.indexOf(item), item.quantity)}>
+                                    onClick = {() => incrementHandler(index, item.quantity)}>
                                   +
                                 </button>
                               </span>
