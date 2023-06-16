@@ -13,11 +13,6 @@ const Cart = () => {
     cartProducts: [],
   });
   const [newQuantity, setNewQuantity] = useState(1);
-  // const [change, setChange] = useState(false);
-
-  // const updateCart = () => {
-
-  // }
 
   const updateCartItems = (jsonData) => {
     setCartItems(jsonData.cartProducts);
@@ -50,12 +45,6 @@ const Cart = () => {
     const newQuantity  = quantity + 1;
     const cartProduct = cartItems[cartProductId];
     console.log("Quantity" , newQuantity);
-    // const updatedCart  = {
-     
-    // }
-
-    // updateCart(updatedCart);
-    // setChange(!change);
     console.log(cartProduct);
   }
 
@@ -64,12 +53,6 @@ const Cart = () => {
     const cartProduct = cartItems[cartProductId];
     console.log("Quantity" , newQuantity);
     console.log(cartProduct);
-    // const updatedCart  = {
-
-    // }
-
-    // updateCart(updatedCart);
-    // setChange(!change);
   }
 
   return (
