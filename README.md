@@ -12,7 +12,6 @@ const Cart = () => {
     },
     cartProducts: [],
   });
-  const [newQuantity, setNewQuantity] = useState(1);
   const [change, setChange] = useState(false);
 
   const updateCartItems = (jsonData) => {
@@ -95,8 +94,7 @@ const Cart = () => {
                                     onClick = {() => decrementHandler(index, item.quantity)}>
                                   -
                                 </button>
-                                {setNewQuantity(item.quantity)}
-                                <b>{newQuantity}</b>
+                                <b>{item.quantity}</b>
                                 <button style={{background:"none", border: "none", outline: "none"}} 
                                     onClick = {() => incrementHandler(index, item.quantity)}>
                                   +
